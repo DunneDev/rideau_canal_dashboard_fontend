@@ -28,13 +28,32 @@ export default function Dashboard(props: { disableCustomTheme?: boolean }) {
   const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
-    (async () => {
-      console.log(import.meta.env.VITE_BACKEND_URL);
-      const res = await fetch(import.meta.env.VITE_BACKEND_URL);
-      const json = await res.json();
-      setData(json);
-      setLoading(false);
-    })();
+    let isMounted = true;
+    const fetchData = async () => {
+      try {
+        const res = await fetch(import.meta.env.VITE_BACKEND_URL);
+        const json = await res.json();
+        console.log("hi");
+        if (isMounted) {
+          setData(json);
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error("Failed to fetch data:", err);
+      }
+    };
+
+    // Fetch immediately
+    fetchData();
+
+    // Fetch every 30 seconds
+    const interval = setInterval(fetchData, 30000);
+
+    // Cleanup
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
   }, []);
 
   if (loading) return <div>Loading...</div>;
