@@ -8,8 +8,8 @@ import CurrentIceBarChart from "./CurrentIceBarChart";
 import IceComparisonLineChart from "./IceComparisonLineChart";
 import TempComparisonLineChart from "./TempComparisonLineChart";
 
-export default function MainGrid({dataProp}: any) {
-  const dow = dataProp.filter((item: any) => item.location === "Dows Lake");
+export default function MainGrid({ dataProp }: any) {
+  const dow = dataProp.filter((item: any) => item.location === "Dow's Lake");
   const fifth = dataProp.filter((item: any) => item.location === "Fifth Ave");
   const nac = dataProp.filter((item: any) => item.location === "NAC");
 
@@ -44,10 +44,16 @@ export default function MainGrid({dataProp}: any) {
       </Typography>
       <Grid container spacing={2} columns={12}>
         <Grid item size={{ sm: 12, md: 6 }}>
-          <IceGraphCard locationMap={locationMap} locationNames={locationNames} />
+          <IceGraphCard
+            locationMap={locationMap}
+            locationNames={locationNames}
+          />
         </Grid>
-        <Grid item size={{ sm: 12, md: 6}}>
-          <TempGraphCard locationMap={locationMap} locationNames={locationNames} />
+        <Grid item size={{ sm: 12, md: 6 }}>
+          <TempGraphCard
+            locationMap={locationMap}
+            locationNames={locationNames}
+          />
         </Grid>
       </Grid>
 

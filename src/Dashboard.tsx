@@ -33,6 +33,7 @@ export default function Dashboard(props: { disableCustomTheme?: boolean }) {
       try {
         const res = await fetch(import.meta.env.VITE_BACKEND_URL);
         const json = await res.json();
+        console.log(json);
         if (isMounted) {
           setData(json);
           setLoading(false);
