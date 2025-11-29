@@ -33,7 +33,6 @@ export default function Dashboard(props: { disableCustomTheme?: boolean }) {
       try {
         const res = await fetch(import.meta.env.VITE_BACKEND_URL);
         const json = await res.json();
-        console.log("hi");
         if (isMounted) {
           setData(json);
           setLoading(false);
@@ -43,13 +42,13 @@ export default function Dashboard(props: { disableCustomTheme?: boolean }) {
       }
     };
 
-    // Fetch immediately
+    // fetch immediately
     fetchData();
 
-    // Fetch every 30 seconds
+    // fetch every 30 seconds
     const interval = setInterval(fetchData, 30000);
 
-    // Cleanup
+    // cleanup
     return () => {
       isMounted = false;
       clearInterval(interval);
